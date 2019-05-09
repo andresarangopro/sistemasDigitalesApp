@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "100682402767",
+    "firebase_url": "https://modulo-de-medicion.firebaseio.com",
+    "project_id": "modulo-de-medicion",
+    "storage_bucket": "modulo-de-medicion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100682402767:android:42f37c0a475825cb",
+        "android_client_info": {
+          "package_name": "com.example.sistdigitales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100682402767-r60rnc4kvn2f8jeae8ckjhq5gp18c623.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sistdigitales",
+            "certificate_hash": "c863c953f4da7e49f6b9af8f81fa41dec369fd5f"
+          }
+        },
+        {
+          "client_id": "100682402767-b6fidaf775mlhkb6b4bdqil4rermpnqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPSiejgLtoYl_wvfSkFI8bHOtqEwkjlMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100682402767-b6fidaf775mlhkb6b4bdqil4rermpnqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

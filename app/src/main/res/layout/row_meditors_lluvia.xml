@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+          <ImageView android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="0.5"
+                       android:src="@mipmap/ic_rain"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sensor de lluvia"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:textAlignment="center"
+                    android:id="@+id/tvModLluvia"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="24sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:hint="FECHA: 12/08/2019"
+                    android:textColor="@color/md_black_1000"
+                    android:id="@+id/tvFechaModLluvia"
+                    android:textAlignment="center"
+                    android:textSize="17sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="HORA: 00:30::00"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/md_black_1000"
+                    android:id="@+id/tvFechaModLluviaH"
+                    android:textAlignment="center"
+                    android:textSize="17sp" />
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="LLUEVE" android:paddingBottom="10dp"
+                        android:textColor="@color/md_black_1000"
+                        android:id="@+id/tvEstadoModLluvia"
+                        android:textAlignment="center"
+                        android:textSize="17sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

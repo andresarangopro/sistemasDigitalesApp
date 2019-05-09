@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5">
+
+
+                <pl.pawelkleczkowski.customgauge.CustomGauge
+                        android:id="@+id/gaugeHumedad"
+                        android:layout_width="match_parent"
+                        android:layout_height="195dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="17dp"
+                        android:paddingTop="20dp"
+                        app:gaugeDividerColor="@color/md_white_1000"
+                        app:gaugeDividerDrawFirst="false"
+                        app:gaugeDividerDrawLast="true"
+                        app:gaugeDividerSize="1"
+                        app:gaugeDividerStep="10"
+                        app:gaugeEndValue="100"
+                        app:gaugePointEndColor="@color/md_blue_900"
+                        app:gaugePointStartColor="@color/md_blue_100"
+                        app:gaugeStartAngle="180"
+                        app:gaugeStartValue="0"
+                        app:gaugeStrokeCap="BUTT"
+                        app:gaugeStrokeColor="@color/md_grey_400"
+                        app:gaugeStrokeWidth="20dp"
+                        app:gaugeSweepAngle="180" android:layout_marginLeft="0dp" android:layout_marginStart="0dp"
+                        android:layout_marginRight="0dp" android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="-41dp" android:layout_centerInParent="true"/>
+
+                <TextView
+                        android:id="@+id/tvPorcentHumedad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/gaugeHumedad"
+                        android:layout_alignBottom="@+id/gauge2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="47dp"
+                        android:layout_marginBottom="48dp"
+                        android:text="0%"
+                        android:textSize="30dp"
+                        android:textStyle="bold"/>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sensor humedad"
+                    android:textAlignment="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/md_black_1000"
+                    android:id="@+id/tvModGeneric"
+                    android:textSize="24sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FECHA: 12/08/2019"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/tvFechaModHum"
+                    android:textAlignment="center"
+                    android:textSize="17sp" />
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="HORA: 00:30:00"
+                        android:id="@+id/tvFechaModHumH"
+                        android:textAlignment="center"
+                        android:textSize="17sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
