@@ -60,7 +60,12 @@ class RecordsActivity : AppCompatActivity() {
                 makeRequest()
                 handlingExcel!!.getFirebaseValues()
                 //handlingExcel!!.getPublicAlbumStorageDir("casta.txt")
-                Log.d("Item clicked", "Item print clicked")}
+                Log.d("Item clicked", "Item print clicked")
+            }
+            android.R.id.home -> {
+                finish()
+                overridePendingTransition(R.anim.push_right_out, R.anim.push_right_in)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -111,6 +116,7 @@ class RecordsActivity : AppCompatActivity() {
 
         buttonStyleAdapter!!.notifyDataSetChanged()
     }
+
 
 
 }

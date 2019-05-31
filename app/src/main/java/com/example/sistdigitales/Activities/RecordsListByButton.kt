@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.sistdigitales.*
 import com.example.sistdigitales.Adapters.AdapterButton
@@ -96,5 +97,15 @@ class RecordsListByButton : AppCompatActivity() {
         var valHashMap = dataFromFirebase!!.value as HashMap<String, Any>
         var moduloReturn = valHashMap.get(modulo) as  HashMap<String, Any>
         return moduloReturn!!
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                finish()
+                overridePendingTransition(R.anim.push_right_out, R.anim.push_right_in)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

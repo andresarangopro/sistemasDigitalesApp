@@ -27,7 +27,8 @@
         </provider>
 
         <activity android:name=".Activities.RecordsListByButton"
-                  android:parentActivityName=".Activities.RecordsActivity">
+                  android:parentActivityName=".Activities.RecordsActivity"
+        >
         </activity>
         <activity android:name=".Activities.RecordsActivity"
                   android:parentActivityName=".Activities.MainActivity">
