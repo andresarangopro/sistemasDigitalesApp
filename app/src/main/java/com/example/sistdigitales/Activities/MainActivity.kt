@@ -14,6 +14,7 @@ import com.example.sistdigitales.Adapters.AdapterButton
 import com.example.sistdigitales.Models.ButtonStyle
 import com.example.sistdigitales.R
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.button_errors.*
 import kotlinx.android.synthetic.main.button_image.*
 import kotlinx.android.synthetic.main.button_records.*
 
@@ -24,12 +25,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when(v!!.id){
             R.id.btnMeditions ->{startActivity(Intent(this, MeditionsActivity::class.java))}
             R.id.btnRecords ->{startActivity(Intent(this, RecordsActivity::class.java))}
+            R.id.btnErrors ->{startActivity(Intent(this, WarningsActivity::class.java))}
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val  actionBr = supportActionBar
+        actionBr!!.title ="MENU PRINCIPAL"
         init()
     }
 
@@ -41,11 +45,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         var ivBtnRecords = ivRecord
         var tvRecords = tvButtonRecord
 
+        var ivBtnError = ivRecordE
+        var tvRecordE = tvButtonRecordE
+
         tvStadistics.text = "ÚLTIMA MEDICIÓN"
         tvRecords.text = "HISTORIAL"
+        tvRecordE.text = "ALERTAS"
 
         Picasso.get().load(R.mipmap.ic_stadistics).into(ivBtnStadistics);
         Picasso.get().load(R.mipmap.ic_clipboard).into(ivBtnRecords);
+        Picasso.get().load(R.mipmap.ic_warn).into(ivBtnError);
     }
 
 

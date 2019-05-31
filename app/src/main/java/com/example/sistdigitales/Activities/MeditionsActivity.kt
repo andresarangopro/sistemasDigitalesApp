@@ -1,13 +1,16 @@
 package com.example.sistdigitales.Activities
 
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.sistdigitales.*
 import com.example.sistdigitales.Adapters.AdapterButton
 import com.example.sistdigitales.Models.*
+import com.example.sistdigitales.Util.bubbleOrderingList
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -24,21 +27,26 @@ class MeditionsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meditions)
-
+        val  actionBr = supportActionBar
+        actionBr!!.title ="ÚLTIMA MEDICIÓN"
         getFirebaseValues()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun adapterOrganized(){
-        //buttonStyleList = ArrayList<Any>()
+        if(buttonStyleList!=null){
+            buttonStyleAdapter = AdapterButton(buttonStyleList!!, this, R.layout.row_meditors_generic)
+            layoutManager = LinearLayoutManager(this)
 
-        buttonStyleAdapter = AdapterButton(buttonStyleList!!, this, R.layout.row_meditors_generic)
-        layoutManager = LinearLayoutManager(this)
+            rvGenericGauge.layoutManager = layoutManager
+            rvGenericGauge.adapter = buttonStyleAdapter
 
-        ///
-        rvGenericGauge.layoutManager = layoutManager
-        rvGenericGauge.adapter = buttonStyleAdapter
+            buttonStyleAdapter!!.notifyDataSetChanged()
+        }
+    }
 
-        buttonStyleAdapter!!.notifyDataSetChanged()
+    fun cutListOnlyfirst(list: ArrayList<Any>?):ArrayList<Any>{
+        return arrayListOf<Any>(list!!.get(0),list!!.get(1),list!!.get(2),list!!.get(3))
     }
 
     fun getFirebaseValues(){
@@ -47,6 +55,7 @@ class MeditionsActivity : AppCompatActivity() {
 
         databaseReference.addValueEventListener(object :ValueEventListener{
 
+            @RequiresApi(Build.VERSION_CODES.N)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 buttonStyleList = ArrayList<Any>()
@@ -59,63 +68,35 @@ class MeditionsActivity : AppCompatActivity() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun getModulos(dataFromFirebase: DataSnapshot){
-        getListObjects(getData(dataFromFirebase, MODULO_TEMPERATURA), TEMPERATURA)
-        getListObjects(getData(dataFromFirebase, MODULO_HUMEDAD) , HUMEDAD)
-        getListObjects(getData(dataFromFirebase, MODULO_LUZ), PORCENTAJELUZ)
 
-        getListObjects(getData(dataFromFirebase, MODULO_LLUVIA), TIEMPO)
+        getListObjects(getData(dataFromFirebase, MODULO_TEMPERATURA), MODULO_TEMPERATURA)
+        getListObjects(getData(dataFromFirebase, MODULO_HUMEDAD) , MODULO_HUMEDAD)
+        getListObjects(getData(dataFromFirebase, MODULO_LUZ), MODULO_LUZ)
+        getListObjects(getData(dataFromFirebase, MODULO_LLUVIA), MODULO_LLUVIA)
+        buttonStyleList = bubbleOrderingList(buttonStyleList!!)
+        buttonStyleList = cutListOnlyfirst(buttonStyleList!!)
         adapterOrganized()
     }
 
     fun getListObjects(dataMap:HashMap<String, Any>, modulo:String){
         var Sensor:Any?=null
-        var isLate_uno= false
-        var isLate_dos= false
-        var isLate_tres= false
-        var isLate_cuatro= false
+
         for(k in dataMap.keys){
             var data = dataMap.get(k) as HashMap<String, Any>
-
             when(modulo){
-                TEMPERATURA->{
-                   if(!isLate_uno){
-                       Sensor = SensorTemperatura("","", TEMPERATURA, yelow_md_50,md_red_900)
-                       Sensor.getValuesFromHashMap(data)
-                       isLate_uno = true
-                       pickLastData(dataMap)
-                       buttonStyleList!!.add(Sensor!!)
-                   }else{
-                       Log.d("wtd", "wtf")
-                   }
-                }
-                HUMEDAD->{
-                    if(!isLate_dos) {
-                        Sensor = SensorHumedad("", "", HUMEDAD, md_blue_100, md_blue_900)
-                        Sensor.getValuesFromHashMap(data)
-                        isLate_dos = true
-                        buttonStyleList!!.add(Sensor!!)
-                    }
-                }
-                PORCENTAJELUZ->{
-                    if(!isLate_tres) {
-                        Sensor = SensorLuz("", "", PORCENTAJELUZ, md_blue_grey_400, md_black_1000)
-                        Sensor.getValuesFromHashMap(data)
-                        isLate_tres = true
-                        buttonStyleList!!.add(Sensor!!)
-                    }
-                }
-                TIEMPO-> {
-                    if (!isLate_cuatro) {
-                        Sensor = SensorLluvia("", "", TIEMPO)
-                        Sensor.getValuesFromHashMap(data)
-                        isLate_cuatro = true
-                        buttonStyleList!!.add(Sensor!!)
-                    }
-                }
+                MODULO_TEMPERATURA ->{Sensor = SensorTemperatura("","", TEMPERATURA, yelow_md_50, md_red_900)
+                    Sensor.getValuesFromHashMap(data)}
+                MODULO_HUMEDAD ->{Sensor = SensorHumedad("","", HUMEDAD, md_blue_100, md_blue_900)
+                    Sensor.getValuesFromHashMap(data)}
+                MODULO_LUZ ->{Sensor = SensorLuz("","", PORCENTAJELUZ,  md_blue_grey_400, md_black_1000)
+                    Sensor.getValuesFromHashMap(data)}
+                MODULO_LLUVIA ->{Sensor = SensorLluvia("","", TIEMPO)
+                    Sensor.getValuesFromHashMap(data) }
 
             }
-
+            buttonStyleList!!.add(Sensor!!)
         }
     }
 
@@ -137,8 +118,5 @@ class MeditionsActivity : AppCompatActivity() {
         var moduloReturn = valHashMap.get(modulo) as  HashMap<String, Any>
        return moduloReturn!!
     }
-
-
-
 
 }

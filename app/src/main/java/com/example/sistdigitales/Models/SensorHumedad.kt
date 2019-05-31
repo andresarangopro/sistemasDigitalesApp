@@ -1,5 +1,7 @@
 package com.example.sistdigitales.Models
 
+import com.example.sistdigitales.HUMEDAD
+import com.example.sistdigitales.TEMPERATURA
 import java.sql.Timestamp
 import java.util.*
 import kotlin.collections.HashMap
@@ -11,6 +13,15 @@ class SensorHumedad(override var valor: String,
                     override var startColor: Int,
                     override var endColor: Int
 ) : SensorI {
+    override fun getPorLuz(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override var modulo: String
+        get() = HUMEDAD
+        set(value) {HUMEDAD}
+
+
     override fun timeStampToDate(): String {
         val ts = Timestamp(this.fecha!!.toLong());
         val date = Date(ts.time)

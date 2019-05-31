@@ -1,5 +1,7 @@
 package com.example.sistdigitales.Models
 
+import android.util.Log
+import com.example.sistdigitales.PORCENTAJELUZ
 import java.sql.Timestamp
 import java.util.*
 import kotlin.collections.HashMap
@@ -10,6 +12,17 @@ class SensorLuz(override var valor: String,
                 override var startColor: Int,
                 override var endColor: Int
 ) :SensorI {
+    override fun getPorLuz(): Int {
+        var value = this.valor.toDouble()
+        value = (value*100)/20000
+        Log.d("val", "${value.toInt()}")
+        return value.toInt()
+    }
+
+    override var modulo: String
+        get() = PORCENTAJELUZ
+        set(value) {PORCENTAJELUZ}
+
     override fun timeStampToDate(): String {
         val ts = Timestamp(this.fecha!!.toLong());
         val date = Date(ts.time)
@@ -24,4 +37,6 @@ class SensorLuz(override var valor: String,
         this.fecha = mapValues.get("fecha").toString()
         this.valor = mapValues.get("value").toString()
     }
+
+
 }

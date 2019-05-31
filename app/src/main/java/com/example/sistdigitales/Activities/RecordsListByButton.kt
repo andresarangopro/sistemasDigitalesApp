@@ -1,12 +1,16 @@
 package com.example.sistdigitales.Activities
 
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.Toast
 import com.example.sistdigitales.*
 import com.example.sistdigitales.Adapters.AdapterButton
 import com.example.sistdigitales.Models.*
+import com.example.sistdigitales.Util.orderByData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,19 +29,23 @@ class RecordsListByButton : AppCompatActivity() {
         setContentView(R.layout.activity_record_temperature)
         var extras = intent.extras
         moduloExtras = extras.get("modulo").toString()
+        var textToolbar = " ${moduloExtras!!.substring(0,6)} ${moduloExtras!!.substring(6,moduloExtras!!.length)} "
+        val  actionBr = supportActionBar
+        actionBr!!.title =textToolbar!!.toUpperCase()
         getFirebaseValues()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun adapterOrganized(){
+           buttonStyleAdapter = AdapterButton(buttonStyleList!!, this, R.layout.row_meditors_generic)
+           layoutManager = LinearLayoutManager(this)
+           buttonStyleList= orderByData(buttonStyleList!!)
+           ///
+           rvGenericGauge.layoutManager = layoutManager
+           rvGenericGauge.adapter = buttonStyleAdapter
 
-        buttonStyleAdapter = AdapterButton(buttonStyleList!!, this, R.layout.row_meditors_generic)
-        layoutManager = LinearLayoutManager(this)
+           buttonStyleAdapter!!.notifyDataSetChanged()
 
-        ///
-        rvGenericGauge.layoutManager = layoutManager
-        rvGenericGauge.adapter = buttonStyleAdapter
-
-        buttonStyleAdapter!!.notifyDataSetChanged()
     }
 
 
@@ -47,6 +55,7 @@ class RecordsListByButton : AppCompatActivity() {
 
         databaseReference.addValueEventListener(object : ValueEventListener {
 
+            @RequiresApi(Build.VERSION_CODES.N)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 getModulos(dataSnapshot, moduloExtras)
             }
@@ -57,6 +66,7 @@ class RecordsListByButton : AppCompatActivity() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun getModulos(dataFromFirebase: DataSnapshot, moduloToGet:String?){
         buttonStyleList = ArrayList<Any>()
         getListObjects(getData(dataFromFirebase,moduloToGet!!), moduloToGet)
