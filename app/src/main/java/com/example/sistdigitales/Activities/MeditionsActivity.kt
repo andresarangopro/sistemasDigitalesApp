@@ -1,5 +1,6 @@
 package com.example.sistdigitales.Activities
 
+import android.app.ProgressDialog
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -24,7 +25,6 @@ class MeditionsActivity : AppCompatActivity() {
     var buttonStyleAdapter: AdapterButton? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meditions)
@@ -47,7 +47,7 @@ class MeditionsActivity : AppCompatActivity() {
     }
 
     fun cutListOnlyfirst(list: ArrayList<Any>?):ArrayList<Any>{
-        return arrayListOf<Any>(list!!.get(0),list!!.get(1),list!!.get(2),list!!.get(3))
+        return arrayListOf(list!!.get(0),list!!.get(1),list!!.get(2),list!!.get(3))
     }
 
     fun getFirebaseValues(){
@@ -58,8 +58,7 @@ class MeditionsActivity : AppCompatActivity() {
 
             @RequiresApi(Build.VERSION_CODES.N)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                buttonStyleList = ArrayList<Any>()
+                buttonStyleList = ArrayList()
                 getModulos(dataSnapshot)
             }
             override fun onCancelled(error: DatabaseError) {
@@ -71,7 +70,6 @@ class MeditionsActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun getModulos(dataFromFirebase: DataSnapshot){
-
         getListObjects(getData(dataFromFirebase, MODULO_TEMPERATURA), MODULO_TEMPERATURA)
         getListObjects(getData(dataFromFirebase, MODULO_HUMEDAD) , MODULO_HUMEDAD)
         getListObjects(getData(dataFromFirebase, MODULO_LUZ), MODULO_LUZ)
@@ -99,19 +97,6 @@ class MeditionsActivity : AppCompatActivity() {
             }
             buttonStyleList!!.add(Sensor!!)
         }
-    }
-
-    fun pickLastData(hashMapToCompare:HashMap<String, Any>):HashMap<String, Any>{
-        for(medition in hashMapToCompare.keys){
-            var medOut = hashMapToCompare.get(medition) as HashMap<String, Any>
-            Log.d("val", medOut.get("fecha").toString())
-            for(meditionIn in hashMapToCompare.keys){
-
-                var medIn = hashMapToCompare.get(meditionIn) as HashMap<String, Any>
-
-            }
-        }
-        return hashMapToCompare
     }
 
     fun getData(dataFromFirebase: DataSnapshot, modulo:String):HashMap<String, Any>{

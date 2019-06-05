@@ -8,19 +8,8 @@ import com.example.sistdigitales.Models.Sensor
 import com.example.sistdigitales.Models.SensorI
 
 @RequiresApi(Build.VERSION_CODES.N)
-fun orderByData(buttonStyleList: ArrayList<Any>):ArrayList<Any>?{
-
-    for(sensor in bubbleOrderingList(buttonStyleList)){
-        var objc = sensor as SensorI
-        Log.d("info", "${objc.valor} -- ${objc.fecha}")
-    }
-    return buttonStyleList
-}
-
-
-@RequiresApi(Build.VERSION_CODES.N)
 fun bubbleOrderingList(vectorToOrder:ArrayList<Any>):ArrayList<Any>{
-    var dataAux:Any?=null
+    var dataAux:Any
     for(i in 2..vectorToOrder.size-1){
         for(j in 0..vectorToOrder.size-i){
             var sensorObjj = vectorToOrder[j] as SensorI
@@ -37,3 +26,4 @@ fun bubbleOrderingList(vectorToOrder:ArrayList<Any>):ArrayList<Any>{
 
     return vectorToOrder
 }
+
