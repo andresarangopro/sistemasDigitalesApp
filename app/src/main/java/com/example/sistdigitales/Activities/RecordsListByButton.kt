@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.sistdigitales.*
 import com.example.sistdigitales.Adapters.AdapterButton
 import com.example.sistdigitales.Models.*
+import com.example.sistdigitales.Util.bubbleOrderingList
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -39,7 +40,7 @@ class RecordsListByButton : AppCompatActivity() {
     fun adapterOrganized(){
            buttonStyleAdapter = AdapterButton(buttonStyleList!!, this, R.layout.row_meditors_generic)
            layoutManager = LinearLayoutManager(this)
-           buttonStyleList= orderByData(buttonStyleList!!)
+           buttonStyleList= bubbleOrderingList(buttonStyleList!!)
            ///
            rvGenericGauge.layoutManager = layoutManager
            rvGenericGauge.adapter = buttonStyleAdapter

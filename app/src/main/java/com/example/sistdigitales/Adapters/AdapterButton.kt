@@ -19,7 +19,6 @@ import com.example.sistdigitales.Activities.RecordsListByButton
 import com.example.sistdigitales.Models.ButtonStyle
 import com.example.sistdigitales.Models.SensorI
 import com.example.sistdigitales.Models.SensorLluvia
-import com.example.sistdigitales.Util.orderByData
 import com.squareup.picasso.Picasso
 import pl.pawelkleczkowski.customgauge.CustomGauge
 import java.math.RoundingMode
