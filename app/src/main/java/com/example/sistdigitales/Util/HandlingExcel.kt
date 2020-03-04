@@ -13,8 +13,10 @@ import java.io.*
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.os.FileUriExposedException
 import android.support.annotation.RequiresApi
 import android.util.Log
+import java.lang.reflect.InvocationTargetException
 import java.net.URLConnection
 import java.net.URLConnection.guessContentTypeFromName
 
@@ -79,7 +81,11 @@ class HandlingExcel{
 
             @RequiresApi(Build.VERSION_CODES.N)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                getModulos(dataSnapshot)
+                try{
+                    getModulos(dataSnapshot)
+                }catch (ite: InvocationTargetException){
+
+                }catch (fue: FileUriExposedException){}
             }
             override fun onCancelled(error: DatabaseError) {
 
